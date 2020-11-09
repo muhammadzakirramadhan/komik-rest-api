@@ -12,15 +12,15 @@ class Router:
         def root():
             return model.getRootData()
 
-        @app.route('/api/list')
+        @app.route('/api/daftar')
         def daftar_komik():
             return model.getDaftarKomik()
         
-        @app.route('/api/project')
+        @app.route('/api/projek')
         def project_list():
             return model.getProjectList()
         
-        @app.route('/api/complete')
+        @app.route('/api/tamat')
         def komik_tamat():
             return model.getKomikTamat()
         

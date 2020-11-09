@@ -35,9 +35,9 @@ Then open [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 | Url        | Params           | Type |
 | ------------- |:-------------:| :-----:| 
 | /api      | page | Number | 
-| /api/list  | page | Number | 
-| /project  | page | Number | 
-| /api/complete  | page | Number | 
+| /api/daftar  | page | Number | 
+| /api/projeck  | page | Number | 
+| /api/tamat  | page | Number | 
 | /api/jadwal  | - | - | 
 | /api/komik  | id | String | 
 | /api/chapter  | id | String | 

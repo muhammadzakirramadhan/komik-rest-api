@@ -6,7 +6,7 @@ class Router:
 
         @app.route('/')
         def home():
-            return '403'
+            return {'author':'Yuusha Project'}
         
         @app.route('/api')
         def root():

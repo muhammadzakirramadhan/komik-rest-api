@@ -5,4 +5,4 @@ headers = {
     'referer':urlPath
 }
 
-bypasser = 'http://arimaralih.triweb.id/l.php?u='
+bypasser = 'https://zakir.educationhost.cloud/l.php?u='

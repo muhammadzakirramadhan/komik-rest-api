@@ -1,7 +1,16 @@
 from bs4 import BeautifulSoup as bs
-from lib.config import urlPath,errorMessage,headers
+from lib.config import urlPath,errorMessage,headers,bypasser
 import requests
 from flask import request as req
+import base64
+
+def imageCV(url):
+
+    response = requests.get(url, headers={'referer': url}).content
+    # uri = ("data:" + response.headers['Content-Type'] + ";" + "base64," + base64.b64encode(response.content))
+
+    print (response)
+    return response
 
 def getRootData():
     newUrl = urlPath if req.args.get('page') is None else urlPath + 'page/' + req.args.get('page') + '/'
@@ -17,11 +26,14 @@ def getRootData():
 
         # GET HOT COMIC
         for data in soup.find_all('div' , attrs={'class' : 'bs'}):
+            image = data.find('img').get('src').strip()
+
+            # print (image)
             tmp =  {
                 'title' : data.find('div' , attrs={'class' : 'tt'}).get_text().strip(),
                 'ch' : data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().strip().replace('Ch.' , ''),
                 'rating' : data.find('div' , attrs={'class' : 'rating'}).find('i').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+image,
                 'type': data.find('span' , attrs={'class' : 'type'}).get_text().strip(),
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
                 'linkId': data.find('a').get('href').replace('https://komikcast.com/komik/' , '') if data.find('a') is not None else None,

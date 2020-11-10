@@ -4,6 +4,37 @@ import requests
 from flask import request as req
 import base64
 
+def genreData():
+    name = req.args.get('genre')
+    newUrl = urlPath + 'genres/' + name + '/' if req.args.get('page') is None else urlPath + 'genres/' + name + '/' + 'page/' + req.args.get('page') + '/'
+    page = requests.get(newUrl, headers=headers)
+    soup = bs(page.text, 'html.parser')
+
+    if page.status_code == 200:
+        komik = []
+
+        for data in soup.find_all('div', attrs={'class':'bs'}):
+            image = data.find('img').get('src').strip()
+            tmp =  {
+                'title' : data.find('div' , attrs={'class' : 'tt'}).get_text().strip(),
+                'ch' : data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().strip().replace('Ch.' , ''),
+                'rating' : data.find('div' , attrs={'class' : 'rating'}).find('i').get_text().strip(),
+                'image': bypasser+image,
+                'type': data.find('span' , attrs={'class' : 'type'}).get_text().strip(),
+                'link': data.find('a').get('href') if data.find('a') is not None else None,
+                'linkId': data.find('a').get('href').replace('https://komikcast.com/komik/' , '') if data.find('a') is not None else None,
+            }
+
+            komik.append(tmp)    
+
+        return {
+            'results':{
+                'daftar_komik':komik
+            }
+        }   
+    else:
+        return errorMessage
+
 def getGenre():
     newUrl = urlPath
     page = requests.get(newUrl, headers=headers)

@@ -42,4 +42,7 @@ class Router:
 
         @app.route('/api/genre')
         def genre():
-            return model.getGenre()    
+            return model.getGenre()
+        @app.route('/api/genre_data')
+        def genre_data():
+            return model.genreData()        

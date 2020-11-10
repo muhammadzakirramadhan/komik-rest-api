@@ -27,7 +27,7 @@ def getRootData():
         # GET HOT COMIC
         for data in soup.find_all('div' , attrs={'class' : 'bs'}):
             image = data.find('img').get('src').strip()
-            
+
             tmp =  {
                 'title' : data.find('div' , attrs={'class' : 'tt'}).get_text().strip(),
                 'ch' : data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().strip().replace('Ch.' , ''),
@@ -51,7 +51,7 @@ def getRootData():
 
             tmp = {
                 'title' : data.find('h3').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+data.find('img').get('src').strip(),
                 'isHot': True if data.find('span' , attrs={'class' : 'hot'}) is not None else False,
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
                 'linkId': data.find('a').get('href').replace('https://komikcast.com/komik/' , '') if data.find('a') is not None else None,
@@ -72,7 +72,7 @@ def getRootData():
 
             tmp = {
                 'title' : data.find('h3').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+data.find('img').get('src').strip(),
                 'isHot': True if data.find('span' , attrs={'class' : 'hot'}) is not None else False,
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
                 'linkId': data.find('a').get('href').replace('https://komikcast.com/komik/' , '') if data.find('a') is not None else None,
@@ -111,7 +111,7 @@ def getDaftarKomik():
                 'title' : data.find('div' , attrs={'class': 'tt'}).get_text().strip(),
                 'chapter': data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().replace('Ch.' , '').strip(),
                 'rating' : data.find('div' , attrs={'class': 'rating'}).find('i').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+data.find('img').get('src').strip(),
                 'type': data.find('span' , attrs={'class' : 'type'}).get_text().strip(),
                 'isCompleted': True if data.find('span' , attrs={'class' : 'Completed'}) is not None else False,
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
@@ -148,7 +148,7 @@ def getProjectList():
                 'title' : data.find('div' , attrs={'class': 'tt'}).get_text().strip(),
                 'chapter': data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().replace('Ch.' , '').strip(),
                 'rating' : data.find('div' , attrs={'class': 'rating'}).find('i').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+data.find('img').get('src').strip(),
                 'type': data.find('span' , attrs={'class' : 'type'}).get_text().strip(),
                 'isCompleted': True if data.find('span' , attrs={'class' : 'Completed'}) is not None else False,
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
@@ -185,7 +185,7 @@ def getKomikTamat():
                 'title' : data.find('div' , attrs={'class': 'tt'}).get_text().strip(),
                 'chapter': data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().replace('Ch.' , '').strip(),
                 'rating' : data.find('div' , attrs={'class': 'rating'}).find('i').get_text().strip(),
-                'image': data.find('img').get('src').strip(),
+                'image': bypasser+data.find('img').get('src').strip(),
                 'type': data.find('span' , attrs={'class' : 'type'}).get_text().strip(),
                 'link': data.find('a').get('href') if data.find('a') is not None else None,
                 'linkId': data.find('a').get('href').replace('https://komikcast.com/komik/' , '')[:-1] if data.find('a') is not None else None,
@@ -261,7 +261,7 @@ def getDataKomik():
             })
 
         container = {
-            'image': soup.find('div' , {'class' : 'thumb'}).find('img').get('src'),
+            'image': bypasser+soup.find('div' , {'class' : 'thumb'}).find('img').get('src'),
             'title': soup.find('h1' , {'itemprop' : 'headline'}).get_text().strip(),
             'title_other': soup.find('span' , {'class' : 'alter'}).get_text().strip(),
             'rating': soup.find('div' , {'class' : 'rating'}).find('strong').get_text().replace('Rating' , '').strip(),
@@ -309,7 +309,7 @@ def getChapterComic():
         for data in soup.find('div' , {'id' : 'readerarea'}).find_all('img'):
             if data.get('src').strip() != '':
                 images.append({
-                    'link': data.get('src').strip(),
+                    'link': bypasser+data.get('src').strip(),
                     'width': data.get('width').strip() if data.get('width') is not None else None,
                     'height': data.get('height').strip() if data.get('height') is not None else None,
                 })
@@ -352,7 +352,7 @@ def getSpecificComic():
         for data in soup.find_all('div' , attrs={'class' : 'bs'}):
             image = None
             try:
-                image = data.find('img') .get('src').strip()
+                image = bypasser+data.find('img') .get('src').strip()
             except:
                 pass
 

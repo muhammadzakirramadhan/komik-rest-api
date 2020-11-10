@@ -27,8 +27,7 @@ def getRootData():
         # GET HOT COMIC
         for data in soup.find_all('div' , attrs={'class' : 'bs'}):
             image = data.find('img').get('src').strip()
-
-            # print (image)
+            
             tmp =  {
                 'title' : data.find('div' , attrs={'class' : 'tt'}).get_text().strip(),
                 'ch' : data.find('div' , attrs={'class' : 'epxs'}).find('a').get_text().strip().replace('Ch.' , ''),

@@ -39,3 +39,7 @@ class Router:
         @app.route('/api/cari')
         def search():
             return model.getSpecificComic()
+
+        @app.route('/api/genre')
+        def genre():
+            return model.getGenre()    

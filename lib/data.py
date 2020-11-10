@@ -4,13 +4,29 @@ import requests
 from flask import request as req
 import base64
 
-def imageCV(url):
+def getGenre():
+    newUrl = urlPath
+    page = requests.get(newUrl, headers=headers)
+    soup = bs(page.text, 'html.parser')
 
-    response = requests.get(url, headers={'referer': url}).content
-    # uri = ("data:" + response.headers['Content-Type'] + ";" + "base64," + base64.b64encode(response.content))
+    if page.status_code == 200:
+        genre = []
 
-    print (response)
-    return response
+        for data in soup.find_all('ul', attrs={'class':'genre'}):
+            for gn in data.find_all('li'):
+                tmp = {
+                    'title': gn.find('a').get_text().strip(),
+                    'linkId': gn.find('a').get('href').replace('https://komikcast.com/genres/', '') if gn.find('a') is not None else None,
+                    'link': gn.find('a').get('href') if gn.find('a') is not None else None,
+                }
+                genre.append(tmp)    
+        return {
+            'results' : {
+                'grenre': genre
+            }
+        }    
+    else:
+        return errorMessage
 
 def getRootData():
     newUrl = urlPath if req.args.get('page') is None else urlPath + 'page/' + req.args.get('page') + '/'

@@ -6,7 +6,7 @@ class Router:
 
         @app.route('/')
         def home():
-            return {'author':'Yuusha Project','App':'Komikku'}
+            return model.homeRoot()
         
         @app.route('/api')
         def root():

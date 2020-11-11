@@ -4,11 +4,18 @@ import requests
 from flask import request as req
 import base64
 
+def homeRoot():
+    return {
+        'project':'Yuusha Project',
+        'github':'https://github.com/muhammadzakirramadhan/komik-rest-api#readme',
+    }
+
 def genreData():
-    name = req.args.get('genre')
+    name = req.args.get('id')
     newUrl = urlPath + 'genres/' + name + '/' if req.args.get('page') is None else urlPath + 'genres/' + name + '/' + 'page/' + req.args.get('page') + '/'
     page = requests.get(newUrl, headers=headers)
     soup = bs(page.text, 'html.parser')
+    pagination_page = int(req.args.get('page')) if req.args.get('page') is not None else 1
 
     if page.status_code == 200:
         komik = []
@@ -29,7 +36,8 @@ def genreData():
 
         return {
             'results':{
-                'daftar_komik':komik
+                'daftar_komik':komik,
+                'page': pagination_page
             }
         }   
     else:

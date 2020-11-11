@@ -1,6 +1,6 @@
 # komik-rest-api
 
-[Demo](https://murmuring-crag-47127.herokuapp.com/api)
+[Demo](https://dev-komik.pojokan.my.id/)
 
 ## Installation
 
@@ -42,7 +42,10 @@ Then open [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 | /api/tamat  | page | Number | 
 | /api/jadwal  | - | - | 
 | /api/genre  | - | - | 
-| /api/genre_data  | genre,page | String,Number | 
+| /api/genre_data  | id,page | String,Number | 
 | /api/komik  | id | String | 
 | /api/chapter  | id | String | 
 | /api/cari  | keyword, page | String, Number | 
+
+---
+Thanks to (Rizalord)[https://github.com/rizalord/komikcast-rest-api]
